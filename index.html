@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You My Love</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fdf0f0;
+            font-family: 'Pyidaungsu', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* နှလုံးသား Animation */
+        .heart {
+            position: fixed;
+            top: -10%;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 10;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ပုံ Slide ပြုလုပ်ရန် */
+        .slideshow-container {
+            width: 300px;
+            height: 400px;
+            border: 8px solid white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fade {
+            animation: fadeAnim 1.5s;
+        }
+
+        @keyframes fadeAnim {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        h1 {
+            color: #c9184a;
+            font-size: 1.5rem;
+            margin-top: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* သီချင်းဖွင့်စက်ကို ဖုံးထားရန် */
+        #music-player {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="slideshow-container">
+            <div class="mySlides fade"><img src="p1.jpg"></div>
+            <div class="mySlides fade"><img src="p2.jpg"></div>
+            <div class="mySlides fade"><img src="p3.jpg"></div>
+            <div class="mySlides fade"><img src="p4.jpg"></div>
+            <div class="mySlides fade"><img src="p5.jpg"></div>
+        </div>
+
+        <h1>I Love You So Much! ❤️</h1>
+
+        <div id="music-player">
+            <audio controls autoplay loop>
+                <source src="song.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p style="font-size: 12px; color: #888;">(သီချင်းသံမကြားရလျှင် Play ကိုနှိပ်ပါ)</p>
+        </div>
+    </div>
+
+    <script>
+        // Slide Show အတွက်
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 3000); // ၃ စက္ကန့်လျှင် တစ်ပုံပြောင်းမည်
+        }
+
+        // နှလုံးသားကြွေကျရန်
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+
+</body>
+</html>
